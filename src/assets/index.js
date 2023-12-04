@@ -1,4 +1,4 @@
-import logo from "./logo.png";
+import login from "./login.png";
 import logo2 from "./logo2.png";
 
-export { logo, logo2 };
+export { logo2, login };

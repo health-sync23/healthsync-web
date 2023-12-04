@@ -20,6 +20,13 @@ export const styles = {
     dark: "border-[#0D0D0D]",
     light: "border-[#f3f3f3]",
   },
+  hover: {
+    primary: "hover:text-[#99F2E2]",
+    secondary: "hover:text-[#99F2D9]",
+    alt: "hover:text-[#99F2D9]",
+    dark: "hover:text-[#0D0D0D]",
+    light: "hover:text-[#f3f3f3]",
+  },
   font: {
     primary: "font-[Poppins]",
     secondary: "font-[Rajdhani]",

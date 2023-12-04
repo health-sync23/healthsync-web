@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignUp = () => {
+const PatientEnroll = () => {
   return (
     <div>
       <form action="">
@@ -13,10 +13,10 @@ const SignUp = () => {
         <label htmlFor="">
           <input type="password" placeholder="Password" />
         </label>
-        <button>Signup</button>
+        <button>SignUp</button>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default PatientEnroll;
