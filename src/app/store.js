@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginReducer from "../features/loginSlice";
+import loginReducer from "../features/loginPatientSlice";
 
 const store = configureStore({
   reducer: {
-    login: loginReducer,
+    loginpatient: loginReducer,
   },
 });
 

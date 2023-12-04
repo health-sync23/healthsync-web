@@ -36,11 +36,11 @@ const PatientEnroll = () => {
     }, 2000);
   }
   return (
-    <div className="min-h-screen w-full lg:max-w-[1000px] lg:mx-auto flex flex-col items-center justify-center">
-      <h3 className="capitalize text-xl md:text-2xl">
-        Create new patient account
+    <div className="min-h-screen w-full p-6 flex flex-col gap-6 md:justify-center md:items-center">
+      <h3 className="text-xl uppercase font-semibold md:text-2xl">
+        Create account
       </h3>
-      <div className="p-6 flex flex-col lg:flex-row lg:items-center">
+      <div className=" flex flex-col lg:flex-row lg:items-center">
         <form
           action=""
           className="flex flex-col gap-6 w-full"
