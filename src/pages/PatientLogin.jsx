@@ -71,7 +71,7 @@ const PatientLogin = () => {
           <img src={login} alt="login-svg" />
         </figure>
       </div>
-      <p className="text-lg font-light text-center">
+      <p className=" flex gap-2 text-xs font-light items-center justify-center">
         Don't have account?{" "}
         <Link className={`${styles.text.primary}`} to="/enroll-patient">
           Enroll now

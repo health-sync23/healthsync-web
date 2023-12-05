@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { Input } from "../components";
+import React, { useEffect, useState } from "react";
+import { FormError, Input } from "../components";
 import { styles } from "../constants/styles";
 import Modal from "../components/Modal";
-import { HiCheck, HiCheckCircle } from "react-icons/hi";
+import { HiCheckCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../assets";
-
+import { create } from "../assets";
+import { useDispatch, useSelector } from "react-redux";
+import { createPatient } from "../features/createPatientSlice";
 const PatientEnroll = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const initialState = {
     fullname: "",
     email: "",
@@ -15,7 +17,10 @@ const PatientEnroll = () => {
   };
 
   const [form, setForm] = useState(initialState);
-  const [success, setSuccess] = useState(false);
+
+  const { isCreated, isLoading, isError } = useSelector(
+    (state) => state.createpatient
+  );
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -28,13 +33,17 @@ const PatientEnroll = () => {
   function handlePatientEnroll(e) {
     e.preventDefault();
     console.log(form);
-    setTimeout(() => {
-      setSuccess(true);
+    dispatch(createPatient(form));
+  }
+
+  useEffect(() => {
+    if (isCreated) {
       setTimeout(() => {
         navigate("/patient-signin");
       }, 2000);
-    }, 2000);
-  }
+    }
+  }, [isCreated]);
+
   return (
     <div className="min-h-screen w-full p-6 flex flex-col gap-6 md:justify-center md:items-center">
       <h3 className="text-xl uppercase font-semibold md:text-2xl">
@@ -76,18 +85,20 @@ const PatientEnroll = () => {
               customClass={`border w-full p-2 outline-[#99F2E2] ${styles.border.dark}`}
             />
           </label>
+          {/* error */}
+          <div>{isError && <FormError text={isError} />}</div>
           <button
             type="submit"
             className={`${styles.bg.primary} p-2 rounded-lg`}
           >
-            Enroll Patient
+            {isLoading ? "Creating Account..." : " Enroll Patient"}
           </button>
         </form>
         <figure className="w-full">
-          <img src={login} alt="" />
+          <img src={create} alt="" />
         </figure>
         <div>
-          {success && (
+          {isCreated && (
             <Modal
               icon={<HiCheckCircle />}
               message="Account created succesfully."
@@ -95,7 +106,7 @@ const PatientEnroll = () => {
           )}
         </div>
       </div>
-      <p className="text-center flex gap-2 text-xl font-light">
+      <p className=" flex gap-2 text-xs font-light items-center justify-center">
         Have an account already?
         <Link to="/patient-signin" className={`${styles.text.primary}`}>
           Login

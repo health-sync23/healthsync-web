@@ -5,21 +5,21 @@ const liveurl = "https://healthsync.onrender.com";
 
 const initialState = {
   isLoading: false,
-  isError: "",
+  isError: false,
   isCreated: false,
 };
 
-const createPatient = createAsyncThunk(
+export const createPatient = createAsyncThunk(
   "createpatient/createPatient",
-  async (formData) => {
+  async (form) => {
     const url = `${liveurl}/new-patient`;
     try {
-      const response = await axios.post(url, formData, {
+      const response = await axios.post(url, form, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+      return response.data;
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message;
@@ -34,7 +34,11 @@ const createPatient = createAsyncThunk(
 const createPatientSlice = createSlice({
   name: "createpatient",
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.isError = ""; // or set it to false depending on your state structure
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createPatient.pending, (state, action) => {
@@ -43,14 +47,20 @@ const createPatientSlice = createSlice({
       .addCase(createPatient.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isCreated = true;
-        state.isError = "";
+        state.isError = false;
       })
       .addCase(createPatient.rejected, (state, action) => {
         state.isLoading = false;
         state.isCreated = false;
-        state.isError = action.payload;
+        state.isError = action.error.message;
       });
+    // .addDefaultCase((state, action) => {
+    //   console.error("Unhandled action:", action);
+    //   throw new Error(`Unhandled action type: ${action.type}`);
+    // });
   },
 });
+
+export const { clearError } = createPatientSlice.actions;
 
 export default createPatientSlice.reducer;

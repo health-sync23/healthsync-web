@@ -51,7 +51,7 @@ const loginPatientSlice = createSlice({
         state.isLoading = false;
         state.userId = "";
         state.accessToken = "";
-        state.isError = action.payload;
+        state.isError = action.error.message;
       });
   },
 });
