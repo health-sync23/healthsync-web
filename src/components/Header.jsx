@@ -28,7 +28,7 @@ const Header = () => {
     setToggle(false);
   }
   return (
-    <header className={`p-4  ${styles.bg.light} `}>
+    <header className={`p-4  ${styles.bg.light} bg-opacity-20 `}>
       <nav className="flex justify-between items-center">
         <Logo />
 
@@ -46,7 +46,7 @@ const Header = () => {
           className={
             !toggle
               ? "hidden"
-              : `${styles.text.dark} absolute top-[75px] left-0 ${styles.bg.light} w-full h-screen flex flex-col items-center justify-center gap-8 ${styles.font.secondary}`
+              : `${styles.text.dark} absolute top-[75px] left-0 ${styles.bg.light} bg-opacity-90 w-full h-screen flex flex-col items-center justify-center gap-8 ${styles.font.secondary}`
           }
         >
           {mobileLinks}

@@ -5,7 +5,7 @@ import { styles } from "../constants/styles";
 
 const DoctorSignin = () => {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center">
+    <section className="min-h-screen flex flex-col items-center justify-center p-6">
       <p>
         This page is currently under contruction 🚧. kindly check back later.🙂
       </p>

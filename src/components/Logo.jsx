@@ -8,7 +8,7 @@ const Logo = () => {
       <img src={logo2} alt="" className="w-[40px]" />
       <span className="flex flex-col leading-3">
         <h1
-          className={`${styles.text.alt} flex items-center gap-1 text-xl md:text-2xl font-bold`}
+          className={`${styles.text.alt} flex items-center gap-1 text-xl md:text-2xl font-semibold md:font-bold`}
         >
           Health <span className={`${styles.text.dark}`}>Sync</span>
         </h1>
