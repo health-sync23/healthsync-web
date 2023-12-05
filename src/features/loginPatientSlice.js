@@ -7,10 +7,10 @@ const initialState = {
   isLoading: false,
   accessToken: "",
   userId: "",
-  isError: "",
+  loginError: false,
 };
 
-const loginPatient = createAsyncThunk(
+export const loginPatient = createAsyncThunk(
   "loginpatient/loginPatient",
   async (formData) => {
     const url = `${liveurl}/signin`;
@@ -21,6 +21,7 @@ const loginPatient = createAsyncThunk(
         },
       });
       console.log(response.data);
+      return response.data;
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message;
@@ -35,7 +36,11 @@ const loginPatient = createAsyncThunk(
 const loginPatientSlice = createSlice({
   name: "loginpatient",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.loginError = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginPatient.pending, (state, action) => {
@@ -43,17 +48,18 @@ const loginPatientSlice = createSlice({
       })
       .addCase(loginPatient.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.userId = action.payload.userId;
-        state.accessToken = action.payload.accessToken;
-        state.isError = "";
+        state.userId = action.payload.id;
+        state.accessToken = action.payload.token;
+        state.loginError = false;
       })
       .addCase(loginPatient.rejected, (state, action) => {
         state.isLoading = false;
         state.userId = "";
         state.accessToken = "";
-        state.isError = action.error.message;
+        state.loginError = action.error.message;
       });
   },
 });
 
+export const { reset } = loginPatientSlice.actions;
 export default loginPatientSlice.reducer;

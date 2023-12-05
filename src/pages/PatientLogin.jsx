@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../assets";
-import { Input } from "../components";
+import { FormError, Input } from "../components";
 import { styles } from "../constants/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginPatient, reset } from "../features/loginPatientSlice";
 
 const PatientLogin = () => {
   const initialState = {
@@ -10,7 +12,14 @@ const PatientLogin = () => {
     password: "",
   };
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [form, setForm] = useState(initialState);
+
+  const { accessToken, isLoading, loginError, userId } = useSelector(
+    (state) => state.loginpatient
+  );
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -23,7 +32,17 @@ const PatientLogin = () => {
   function handleUserLogin(e) {
     e.preventDefault();
     console.log(form);
+    dispatch(loginPatient(form));
   }
+
+  useEffect(() => {
+    if (accessToken && userId) {
+      setTimeout(() => {
+        navigate("/patient-dash");
+      }, 2000);
+    }
+  }, [accessToken, userId]);
+
   return (
     <div className="min-h-screen w-full p-6 flex flex-col gap-6 md:justify-center md:items-center">
       <h3 className="text-xl uppercase font-semibold">Patient Login</h3>
@@ -60,11 +79,21 @@ const PatientLogin = () => {
             <Link>Forgot email</Link>
             <Link>Forgot password</Link>
           </span>
+          {/* error */}
+          <div>
+            {loginError && (
+              <FormError
+                text={loginError}
+                customError={loginError}
+                customReset={reset}
+              />
+            )}
+          </div>
           <button
             type="submit"
             className={`${styles.bg.primary} p-2 rounded-lg`}
           >
-            Login
+            {isLoading ? "Logging In..." : " Login"}
           </button>
         </form>
         <figure className="w-full">

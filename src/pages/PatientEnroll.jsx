@@ -6,7 +6,7 @@ import { HiCheckCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { create } from "../assets";
 import { useDispatch, useSelector } from "react-redux";
-import { createPatient } from "../features/createPatientSlice";
+import { clearError, createPatient } from "../features/createPatientSlice";
 const PatientEnroll = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -83,10 +83,19 @@ const PatientEnroll = () => {
               value={form.password}
               onChange={handleInputChange}
               customClass={`border w-full p-2 outline-[#99F2E2] ${styles.border.dark}`}
+              autoComplete="off"
             />
           </label>
           {/* error */}
-          <div>{isError && <FormError text={isError} />}</div>
+          <div>
+            {isError && (
+              <FormError
+                text={isError}
+                customError={isError}
+                customReset={clearError}
+              />
+            )}
+          </div>
           <button
             type="submit"
             className={`${styles.bg.primary} p-2 rounded-lg`}
