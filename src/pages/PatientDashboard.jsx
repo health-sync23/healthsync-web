@@ -13,7 +13,7 @@ const PatientDashboard = () => {
   return (
     <section className="p-6">
       {/* mobile app */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 lg:hidden">
         {activeTab === "Dashboard" ? (
           <DashContent />
         ) : activeTab === "Professionals" ? (
