@@ -8,6 +8,7 @@ import Loader from "./Loader";
 import MedicationCard from "./MedicationCard";
 import QuickActionButton from "./QuickActionButton";
 import FooterMenu from "./FooterMenu";
+import CreateMedicationAlert from "./CreateMedicationAlert";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   MedicationCard,
   QuickActionButton,
   FooterMenu,
+  CreateMedicationAlert,
 };

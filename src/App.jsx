@@ -6,6 +6,7 @@ import PatientEnroll from "./pages/PatientEnroll";
 import { useSelector } from "react-redux";
 import PatientDashboard from "./pages/PatientDashboard";
 import DoctorSignin from "./pages/DoctorSignin";
+import Reminders from "./pages/Reminders";
 
 const App = () => {
   const { accessToken } = useSelector((state) => state.loginpatient);
@@ -24,6 +25,12 @@ const App = () => {
           ) : (
             <PatientLogin to="/patient-signin" />
           )
+        }
+      />
+      <Route
+        path="/reminders"
+        element={
+          accessToken ? <Reminders /> : <PatientLogin to="/patient-signin" />
         }
       />
     </Routes>

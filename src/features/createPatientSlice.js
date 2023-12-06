@@ -54,10 +54,6 @@ const createPatientSlice = createSlice({
         state.isCreated = false;
         state.isError = action.error.message;
       });
-    // .addDefaultCase((state, action) => {
-    //   console.error("Unhandled action:", action);
-    //   throw new Error(`Unhandled action type: ${action.type}`);
-    // });
   },
 });
 
